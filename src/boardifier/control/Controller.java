@@ -134,7 +134,7 @@ public abstract class Controller {
         if (model.getEnd() == 1) {
             System.out.println("GAGNER\nBravo vous avez gagner la combinaison était bien : " + combinaison);
         } else {
-            System.out.println("PERDU\nDommage c'est perdu la combinaison était : " + combinaison);
+            System.out.println("PERDU\nDommage vous êtes nul la combinaison était : " + combinaison);
         }
 
     }
