@@ -9,7 +9,7 @@ public class HoleConsole {
     public static void main(String[] args) {
 
         int mode = 0;
-        if (args.length == 1) {
+        /**if (args.length == 1) {
             try {
                 mode = Integer.parseInt(args[0]);
                 if ((mode <0) || (mode>2)) mode = 0;
@@ -17,10 +17,22 @@ public class HoleConsole {
             catch(NumberFormatException e) {
                 mode = 0;
             }
+        }**/
+        if(args.length == 1){
+            if(args[0].equals("1")){
+                mode = 1;
+            }else{
+                mode = 0;
+            }
+        }else{
+            mode = 0;
         }
         Model model = new Model();
-        model.addHumanPlayer("player");
-
+        if(mode == 1){
+            model.addComputerPlayer("computerDebile");
+        }else{
+            model.addHumanPlayer("player");
+        }
         StageFactory.registerModelAndView("hole", "model.HoleStageModel", "view.HoleStageView");
         View holeView = new View(model);
         HoleController control = new HoleController(model,holeView);

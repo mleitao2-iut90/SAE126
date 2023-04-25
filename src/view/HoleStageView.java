@@ -15,24 +15,24 @@ public class HoleStageView extends GameStageView {
 
     @Override
     public void createLooks() {
-        HoleStageModel model = (HoleStageModel)gameStageModel;
+        HoleStageModel model = (HoleStageModel) gameStageModel;
 
         addLook(new GridLook(5, 2, model.getBoard(), -1, false));
-        addLook(new PawnPotLook(5,2, model.getBlackPot()));
+        addLook(new PawnPotLook(5, 2, model.getBlackPot()));
         addLook(new PawnPotLook(5, 2, model.getRedPot()));
-        addLook(new PawnPotLook(5,2,model.getBoardPotPawn()));
+        addLook(new PawnPotLook(5, 2, model.getBoardPotPawn()));
         HolePawnPot boardPot = model.getBoardPotPawn();
         boardPot.setVisible(false);
 
-        for(int i=0;i<12;i++) {
+        for (int i = 0; i < 12; i++) {
             addLook(new PawnLook(model.getBlackPawns()[i]));
             addLook(new PawnLook(model.getRedPawns()[i]));
         }
-        for(int i = 0; i < 48; i++){
+        for (int i = 0; i < 48; i++) {
             addLook(new PawnLook(model.getPawnsBoard()[i]));
         }
         Pawn[] pawns = model.getPawnsBoard();
-        for(int i = 0; i < 48; i++){
+        for (int i = 0; i < 48; i++) {
             pawns[i].setVisible(false);
         }
     }

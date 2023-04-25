@@ -18,11 +18,14 @@ import model.HoleStageModel;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Calendar;
+import java.util.Random;
 
 public class HoleController extends Controller {
 
     BufferedReader consoleIn;
     boolean firstPlayer;
+    private static final Random loto = new Random(Calendar.getInstance().getTimeInMillis());
 
     public HoleController(Model model, View view) {
         super(model, view);
@@ -54,24 +57,22 @@ public class HoleController extends Controller {
          }**/
         // get the new player
         Player p = model.getCurrentPlayer();
-        /**if (p.getType() == Player.COMPUTER) {
-         System.out.println("COMPUTER PLAYS");
-         HoleDecider decider = new HoleDecider(model,this);
-         ActionPlayer play = new ActionPlayer(model, this, decider, null);
-         play.start();
-         }**/
-        boolean ok = false;
-        while (!ok) {
-            System.out.print(p.getName() + " > ");
-            try {
-                String line = consoleIn.readLine();
-                if (line.length() == 4) {
-                    ok = analyseAndPlay2(line);
+        if (p.getType() == Player.COMPUTER) {
+            analysePlayComputer();
+        } else {
+            boolean ok = false;
+            while (!ok) {
+                System.out.print(p.getName() + " > ");
+                try {
+                    String line = consoleIn.readLine();
+                    if (line.length() == 4) {
+                        ok = analyseAndPlay2(line);
+                    }
+                    if (!ok) {
+                        System.out.println("incorrect instruction. retry !");
+                    }
+                } catch (IOException e) {
                 }
-                if (!ok) {
-                    System.out.println("incorrect instruction. retry !");
-                }
-            } catch (IOException e) {
             }
         }
     }
@@ -112,10 +113,10 @@ public class HoleController extends Controller {
     private boolean analyseAndPlay2(String line) {
         HoleStageModel gameStage = (HoleStageModel) model.getGameStage();
         //VERIF
-        if(line.equals("STOP") || line.equals("stop") || line.equals("Stop")){
+        if (line.equals("STOP") || line.equals("stop") || line.equals("Stop")) {
             stopStage();
             return true;
-        }else if (!goodValEnter(line, false)) {
+        } else if (!goodValEnter(line, false)) {
             return false;
         }
         GridElement board = gameStage.getBoard();
@@ -128,7 +129,7 @@ public class HoleController extends Controller {
         // ACTIONS
         ActionList actions = new ActionList(false);
         // Actions qui montee les pions du board de 1 ligne
-        moveLineUp2(board, actions, whitePot, redPot);
+        moveLineUp2(board, actions);
         // Actions mettre les "pawsBoard" sur le "board" (plateau)
         GridElement pawnBoard = gameStage.getBoardPotPawn();
         for (int i = 0; i < 4; i++) {
@@ -154,7 +155,21 @@ public class HoleController extends Controller {
         return true;
     }
 
-    public void moveLineUp2(GridElement board, ActionList actions, HolePawnPot whitePot, HolePawnPot redPot) {
+    public void analysePlayComputer() {
+        HoleStageModel gameStage = (HoleStageModel) model.getGameStage();
+        System.out.println("COMPUTER PLAYS");
+        String line = setCombRand();
+        HoleDecider decider = new HoleDecider(model, this, line);
+        ActionPlayer play = new ActionPlayer(model, this, decider, null);
+        play.start();
+        gameStage.setNumberPawnDown(line, combinaison);
+        if (gameStage.verifWin() == 4) {
+            stopStage();
+            model.setEnd(1);
+        }
+    }
+
+    public void moveLineUp2(GridElement board, ActionList actions) {
         boolean find = false;
         for (int i = 0; i < 11; i++) {
             if ((board.isEmptyAt(i, 0) && !board.isEmptyAt(i + 1, 0)) || find) {
@@ -166,5 +181,33 @@ public class HoleController extends Controller {
                 }
             }
         }
+    }
+
+    public String setCombRand() {
+        String line = "";
+        int nb;
+        for (int i = 0; i < 4; i++) {
+            nb = loto.nextInt(8);
+            if (nb == 0) {
+                line += "N";
+            } else if (nb == 1) {
+                line += "R";
+            } else if (nb == 2) {
+                line += "B";
+            } else if (nb == 3) {
+                line += "J";
+            } else if (nb == 4) {
+                line += "V";
+            } else if (nb == 5) {
+                line += "W";
+            } else if (nb == 6) {
+                line += "C";
+            } else {
+                line += "P";
+            }
+
+        }
+        //line = "PPPP";
+        return line;
     }
 }

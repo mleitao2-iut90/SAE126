@@ -191,4 +191,12 @@ public abstract class Controller {
         Coord2D center = gridLook.getRootPaneLocationForCellCenter(coords[0], coords[1]);
         element.setLocation(center.getX(), center.getY());
     }
+
+    public void add1PawnAPoser(){
+        this.pawnAPoser++;
+    }
+
+    public int getPawnAPoser(){
+        return this.pawnAPoser;
+    }
 }
