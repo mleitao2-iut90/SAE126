@@ -58,7 +58,11 @@ public class HoleController extends Controller {
         // get the new player
         Player p = model.getCurrentPlayer();
         if (p.getType() == Player.COMPUTER) {
-            analysePlayComputer();
+            if(p.getName().equals("computerDebile")){
+                analysePlayComputer();
+            }else if(p.getName().equals("computerIntelligent1")){
+
+            }
         } else {
             boolean ok = false;
             while (!ok) {
@@ -129,7 +133,7 @@ public class HoleController extends Controller {
         // ACTIONS
         ActionList actions = new ActionList(false);
         // Actions qui montee les pions du board de 1 ligne
-        moveLineUp2(board, actions);
+        gameStage.moveLineUp(board, actions);
         // Actions mettre les "pawsBoard" sur le "board" (plateau)
         GridElement pawnBoard = gameStage.getBoardPotPawn();
         for (int i = 0; i < 4; i++) {
@@ -166,20 +170,6 @@ public class HoleController extends Controller {
         if (gameStage.verifWin() == 4) {
             stopStage();
             model.setEnd(1);
-        }
-    }
-
-    public void moveLineUp2(GridElement board, ActionList actions) {
-        boolean find = false;
-        for (int i = 0; i < 11; i++) {
-            if ((board.isEmptyAt(i, 0) && !board.isEmptyAt(i + 1, 0)) || find) {
-                find = true;
-                for (int j = 0; j < 4; j++) {
-                    GameElement pawn = board.getElement(i + 1, j);
-                    GameAction move = new MoveAction(model, pawn, "holeboard", i, j);
-                    actions.addSingleAction(move);
-                }
-            }
         }
     }
 

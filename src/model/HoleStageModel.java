@@ -1,6 +1,9 @@
 package model;
 
 import boardifier.model.*;
+import boardifier.model.action.ActionList;
+import boardifier.model.action.GameAction;
+import boardifier.model.action.MoveAction;
 
 public class HoleStageModel extends GameStageModel {
 
@@ -165,6 +168,20 @@ public class HoleStageModel extends GameStageModel {
     public int verifWin(){
         Pawn p = (Pawn) (redPot.getElement(11, 0));
         return p.getNumber();
+    }
+
+    public void moveLineUp(GridElement board, ActionList actions) {
+        boolean find = false;
+        for (int i = 0; i < 11; i++) {
+            if ((board.isEmptyAt(i, 0) && !board.isEmptyAt(i + 1, 0)) || find) {
+                find = true;
+                for (int j = 0; j < 4; j++) {
+                    GameElement pawn = board.getElement(i + 1, j);
+                    GameAction move = new MoveAction(model, pawn, "holeboard", i, j);
+                    actions.addSingleAction(move);
+                }
+            }
+        }
     }
 
     private void computePartyResult() {
