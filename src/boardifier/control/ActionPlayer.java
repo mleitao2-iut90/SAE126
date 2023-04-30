@@ -52,7 +52,9 @@ public class ActionPlayer {
         // loop over all action packs
         int idPack = 0;
         for(List<GameAction> actionPack : actions.getActions()) {
-            System.out.println("playing pack "+idPack);
+
+            //Pour savoir si le move est fait le "System.out....."
+            //System.out.println("playing pack "+idPack);
             // step 4 : do the real actions, based on action.type
             for(GameAction action : actionPack) {
                 action.execute();

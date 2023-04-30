@@ -21,6 +21,10 @@ public class MasterMindConsole {
         if(args.length == 1){
             if(args[0].equals("1")){
                 mode = 1;
+            }else if(args[0].equals("2")){
+                mode = 2;
+            }else if(args[0].equals("3")){
+                mode = 3;
             }else{
                 mode = 0;
             }
@@ -30,6 +34,10 @@ public class MasterMindConsole {
         Model model = new Model();
         if(mode == 1){
             model.addComputerPlayer("computerDebile");
+        }else if(mode == 2){
+            model.addComputerPlayer("computerIntelligent1");
+        }else if(mode == 3){
+            model.addComputerPlayer("computerIntelligent2");
         }else{
             model.addHumanPlayer("player");
         }

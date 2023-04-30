@@ -133,7 +133,9 @@ public abstract class Controller {
         System.out.println("END THE GAME");
         if (model.getEnd() == 1) {
             System.out.println("GAGNER\nBravo vous avez gagner la combinaison était bien : " + combinaison);
-        } else {
+        } else if(model.getEnd() == 2){
+            System.out.println("Dommage\nCet IA ne fonctionne pas encore, essayer de mettre en argument 3 pour avoir une vrai IA fonctionnelle \nou 1 pour avoir une IA qui joue aléatoirement");
+        }else{
             System.out.println("PERDU\nDommage vous êtes nul la combinaison était : " + combinaison);
         }
 

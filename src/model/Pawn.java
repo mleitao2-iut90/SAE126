@@ -8,14 +8,14 @@ public class Pawn extends GameElement {
 
     private int number;
     private int color;
-    public static int PAWN_BLACK = 0;
+    public static int PAWN_BLACK = 6;
     public static int PAWN_RED = 1;
-    public static int PAWN_WHITE = 2;
-    public static int PAWN_BLUE = 3;
-    public static int PAWN_YELLOW = 4;
-    public static int PAWN_GREEN = 5;
-    public static int PAWN_CYAN = 6;
-    public static int PAWN_PURPLE = 7;
+    public static int PAWN_WHITE = 5;
+    public static int PAWN_BLUE = 2;
+    public static int PAWN_YELLOW = 3;
+    public static int PAWN_GREEN = 4;
+    public static int PAWN_CYAN = 7;
+    public static int PAWN_PURPLE = 8;
 
     public Pawn(int number, int color, GameStageModel gameStageModel) {
         super(gameStageModel);
@@ -42,28 +42,28 @@ public class Pawn extends GameElement {
     public void setColor(char c) {
         switch(c){
             case 'N':
-                this.color = 0;
+                this.color = PAWN_BLACK;
                 break;
             case 'R':
-                this.color = 1;
+                this.color = PAWN_RED;
                 break;
             case 'B':
-                this.color = 3;
+                this.color = PAWN_BLUE;
                 break;
             case 'J':
                 this.color = PAWN_YELLOW;
                 break;
             case 'V':
-                this.color = 5;
+                this.color = PAWN_GREEN;
                 break;
             case 'W':
-                this.color = 2;
+                this.color = PAWN_WHITE;
                 break;
             case 'C':
-                this.color = 6;
+                this.color = PAWN_CYAN;
                 break;
             case 'P':
-                this.color = 7;
+                this.color = PAWN_PURPLE;
                 break;
             default:
                 System.out.println("mauvais changemant de couleur (erreur dans Pawn)");break;

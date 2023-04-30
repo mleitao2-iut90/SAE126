@@ -35,11 +35,11 @@ PawnLook extends ElementLook {
         // do nothing since a pawn never change of aspect
         GameElement gameElement = (GameElement)element;
         Pawn pawn = (Pawn)gameElement;
-        if (pawn.getColor() == Pawn.PAWN_WHITE) {
+        if (pawn.getColor() == Pawn.PAWN_BLACK) {
             shape[0][0] = ConsoleColor.WHITE + ConsoleColor.BLACK_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
         }else if(pawn.getColor() == Pawn.PAWN_RED){
             shape[0][0] = ConsoleColor.BLACK + ConsoleColor.RED_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
-        }else if(pawn.getColor() == Pawn.PAWN_BLACK){
+        }else if(pawn.getColor() == Pawn.PAWN_WHITE){
             shape[0][0] = ConsoleColor.BLACK + ConsoleColor.WHITE_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
         }else if(pawn.getColor() == Pawn.PAWN_BLUE){
             shape[0][0] = ConsoleColor.BLACK + ConsoleColor.BLUE_BACKGROUND + pawn.getNumber() + ConsoleColor.RESET;
